@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/carrinho/listar', [CarrinhoController::class, 'listar']);
 Route::get('/carrinho/adicionar', [CarrinhoController::class, 'adicionar']);
+Route::get('/carrinho/remover', [CarrinhoController::class, 'remover']);
