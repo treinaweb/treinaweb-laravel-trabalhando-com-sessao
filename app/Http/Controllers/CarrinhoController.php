@@ -13,7 +13,7 @@ class CarrinhoController extends Controller
         // $total = session('total', 'Nenhum item adicionado');
 
 
-        var_dump(session()->all());
+        var_dump(session()->get('mensagem'));
     }
 
     public function adicionar(Request $request)
@@ -22,11 +22,13 @@ class CarrinhoController extends Controller
         // session(['produto' => 'bola']);
         // session(['total' => 'R$ 123,00']);
 
-        if ($request->session()->missing('produtos')) {
-            $request->session()->put('produtos', []);
-        }
+        // if ($request->session()->missing('produtos')) {
+        //     $request->session()->put('produtos', []);
+        // }
 
-        $request->session()->push('produtos', $request->produto);
+        // $request->session()->push('produtos', $request->produto);
+
+        $request->session()->flash('mensagem', 'adicionada ao carrinho com sucesso');
 
         return 'adicionado com sucesso';
     }
