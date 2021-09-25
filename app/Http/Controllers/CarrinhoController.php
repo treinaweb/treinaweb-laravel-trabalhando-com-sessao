@@ -16,11 +16,17 @@ class CarrinhoController extends Controller
         var_dump(session()->all());
     }
 
-    public function adicionar()
+    public function adicionar(Request $request)
     {
         // $request->session()->put('produto', 'Boneca');
-        session(['produto' => 'bola']);
-        session(['total' => 'R$ 123,00']);
+        // session(['produto' => 'bola']);
+        // session(['total' => 'R$ 123,00']);
+
+        if ($request->session()->missing('produtos')) {
+            $request->session()->put('produtos', []);
+        }
+
+        $request->session()->push('produtos', $request->produto);
 
         return 'adicionado com sucesso';
     }
@@ -30,12 +36,12 @@ class CarrinhoController extends Controller
         // $request->session()->forget(['produto', 'total']);
         //$request->session()->flush();
 
-        if ($request->session()->has('produto')) {
-            session()->forget(['produto', 'total']);
+        if ($request->session()->has('produtos')) {
+            session()->forget(['produtos']);
 
-            return 'foi removido com sucesso';
+            return 'O carrinho foi limpo com sucesso';
         }
 
-        return 'Não removeu porque não tinha nenhum produto';
+        return 'Não removeu nenhum item porque não tinha nenhum produto';
     }
 }
