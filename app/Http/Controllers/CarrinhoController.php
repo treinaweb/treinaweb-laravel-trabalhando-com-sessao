@@ -6,13 +6,17 @@ use Illuminate\Http\Request;
 
 class CarrinhoController extends Controller
 {
-    public function listar()
+    public function listar(Request $request)
     {
-        dd('listar');
+        $produto = $request->session()->get('produto', 'Produto não encontrado');
+
+        var_dump($produto);
     }
 
-    public function adicionar()
+    public function adicionar(Request $request)
     {
-        dd('adicionar');
+        $request->session()->put('produto', 'Boneca');
+
+        return 'adicionado com sucesso';
     }
 }
