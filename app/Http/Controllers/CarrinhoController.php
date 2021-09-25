@@ -9,11 +9,11 @@ class CarrinhoController extends Controller
     public function listar(Request $request)
     {
         // $produto = $request->session()->get('produto', 'Produto não encontrado');
-        $produto = session('produto', 'produto não encontrado');
-        $total = session('total', 'Nenhum item adicionado');
+        // $produto = session('produto', 'produto não encontrado');
+        // $total = session('total', 'Nenhum item adicionado');
 
 
-        var_dump($produto, $total);
+        var_dump(session()->all());
     }
 
     public function adicionar()
@@ -29,8 +29,13 @@ class CarrinhoController extends Controller
     {
         // $request->session()->forget(['produto', 'total']);
         //$request->session()->flush();
-        session()->forget(['produto', 'total']);
 
-        return 'foi removido com sucesso';
+        if ($request->session()->has('produto')) {
+            session()->forget(['produto', 'total']);
+
+            return 'foi removido com sucesso';
+        }
+
+        return 'Não removeu porque não tinha nenhum produto';
     }
 }
