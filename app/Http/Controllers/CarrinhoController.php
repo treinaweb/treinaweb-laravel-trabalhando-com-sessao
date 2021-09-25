@@ -8,14 +8,16 @@ class CarrinhoController extends Controller
 {
     public function listar(Request $request)
     {
-        $produto = $request->session()->get('produto', 'Produto não encontrado');
+        // $produto = $request->session()->get('produto', 'Produto não encontrado');
+        $produto = session('produto', 'produto não encontrado');
 
         var_dump($produto);
     }
 
-    public function adicionar(Request $request)
+    public function adicionar()
     {
-        $request->session()->put('produto', 'Boneca');
+        // $request->session()->put('produto', 'Boneca');
+        session(['produto' => 'bola']);
 
         return 'adicionado com sucesso';
     }
